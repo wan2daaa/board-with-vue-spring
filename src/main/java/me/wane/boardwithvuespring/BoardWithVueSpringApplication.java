@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BoardWithVueSpringApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(BoardWithVueSpringApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(BoardWithVueSpringApplication.class, args);
+	}
 
 }
