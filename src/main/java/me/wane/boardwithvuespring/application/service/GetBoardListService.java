@@ -7,6 +7,7 @@ import me.wane.boardwithvuespring.application.port.out.BoardPersistencePort;
 import me.wane.boardwithvuespring.domain.Board;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Window;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,5 +29,16 @@ public class GetBoardListService implements GetBoardListUseCase {
     public Page<Board> executeWithPaging(PageRequest pageRequest, String searchKeyword) {
 
         return boardPersistencePort.getBoardPageBySearchKeyword(pageRequest, searchKeyword);
+    }
+
+    @Override
+    public Window<Board> executeWithOffset(int offset, int size) {
+
+        return boardPersistencePort.getBoardWindow(offset, size);
+    }
+
+    @Override
+    public List<Board> executeWithCursor(long lastId, int size, String searchKeyword) {
+        return boardPersistencePort.getBoardListByCursor(lastId, size, searchKeyword);
     }
 }
