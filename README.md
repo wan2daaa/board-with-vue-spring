@@ -27,6 +27,10 @@
 - 그러면, 간단한 rud 는 하나로 묶어서 처리하는게 좋지 않을까?
   - 일단 BoardPersistencePort 로 묶어서 처리해보자
 
+### 3. Sort의 책임은 어디일까? 
+- repository에서 인지? 
+- controller에서 인지?
+
 # full text search
 ```sql
 SHOW PLUGINS;
