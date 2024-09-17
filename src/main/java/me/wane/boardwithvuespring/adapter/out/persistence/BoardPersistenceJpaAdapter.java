@@ -17,7 +17,7 @@ public class BoardPersistenceJpaAdapter implements BoardPersistencePort {
     private final BoardMapper boardMapper;
     private final BoardEntityRepository boardEntityRepository;
 
-    private static final Sort sortIdDesc = Sort.by(Sort.Direction.DESC, "id");
+    private static final Sort SORT_ID_DESC = Sort.by(Sort.Direction.DESC, "id");
 
     @Override
     public List<Board> getBoardListBySearchKeyword(String searchKeyword) {
@@ -25,7 +25,7 @@ public class BoardPersistenceJpaAdapter implements BoardPersistencePort {
         List<BoardEntity> boardEntities;
 
         if (searchKeyword.isEmpty()) {
-            boardEntities = boardEntityRepository.findAll(sortIdDesc);
+            boardEntities = boardEntityRepository.findAll(SORT_ID_DESC);
         } else {
             boardEntities = boardEntityRepository.findAllByTitleOrContentMatchAgainstOrderByIdDesc(searchKeyword);
         }
@@ -38,7 +38,7 @@ public class BoardPersistenceJpaAdapter implements BoardPersistencePort {
         Page<BoardEntity> boardEntityPage;
 
         if (searchKeyword.isEmpty()) {
-            PageRequest pageRequestWithSortIdDesc = PageRequest.of(pageRequest.getPageNumber(), pageRequest.getPageSize(), sortIdDesc);
+            PageRequest pageRequestWithSortIdDesc = PageRequest.of(pageRequest.getPageNumber(), pageRequest.getPageSize(), SORT_ID_DESC);
             boardEntityPage = boardEntityRepository.findAll(pageRequestWithSortIdDesc);
         } else {
             boardEntityPage = boardEntityRepository.findAllByTitleOrContentMatchAgainstOrderByIdDesc(searchKeyword, pageRequest);
