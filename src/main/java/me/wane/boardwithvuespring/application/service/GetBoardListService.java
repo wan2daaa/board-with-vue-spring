@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import me.wane.boardwithvuespring.application.port.in.GetBoardListUseCase;
 import me.wane.boardwithvuespring.application.port.out.BoardPersistencePort;
 import me.wane.boardwithvuespring.domain.Board;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +21,12 @@ public class GetBoardListService implements GetBoardListUseCase {
     @Override
     public List<Board> execute(String searchKeyword) {
 
-        log.info("searchKeyword: {}", searchKeyword);
-
-        if (searchKeyword.isEmpty()) {
-            return boardPersistencePort.getBoardListIdDesc();
-        }
-
         return boardPersistencePort.getBoardListBySearchKeyword(searchKeyword);
+    }
+
+    @Override
+    public Page<Board> executeWithPaging(PageRequest pageRequest, String searchKeyword) {
+
+        return boardPersistencePort.getBoardPageBySearchKeyword(pageRequest, searchKeyword);
     }
 }
